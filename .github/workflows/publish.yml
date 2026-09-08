@@ -27,12 +27,12 @@ jobs:
           java-version: '17'
           distribution: 'temurin'
           # server-id must match the <id> used in <distributionManagement> in each pom.xml
-          # settings.xml is generated in the default ~/.m2 location so Maven finds it
-          # automatically no matter which module subdirectory we build from.
           server-id: github
 
       - name: Build and publish ${{ matrix.module }}
         working-directory: ./${{ matrix.module }}
         run: mvn --batch-mode deploy -DskipTests
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          # Using a Personal Access Token instead of the default GITHUB_TOKEN,
+          # which can be unreliable for GitHub Packages Maven authentication.
+          GITHUB_TOKEN: ${{ secrets.GH_PACKAGES_TOKEN }}
