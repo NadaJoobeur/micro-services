@@ -28,7 +28,6 @@ jobs:
           distribution: 'temurin'
           # server-id must match the <id> used in <distributionManagement> in each pom.xml
           server-id: github
-          settings-path: ${{ github.workspace }}
 
       - name: Build and publish ${{ matrix.module }}
         working-directory: ./${{ matrix.module }}
